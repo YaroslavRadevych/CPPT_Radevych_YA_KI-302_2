@@ -85,6 +85,11 @@ public class lab2RadevychVynnytskyiKI302
             		fout.println();
             	}
             }
+            
+       for (int i = 0; i < matrix.length; i++) {
+    	   System.out.println(matrix[i].length);
+       }
+            
         break;
         case 0 : 
             System.out.print("No character entered!");
