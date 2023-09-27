@@ -1,5 +1,5 @@
 /**
- * The assaultRifle class represents a model of an assault rifle.
+m * The assaultRifle class represents a model of an assault rifle.
  */
 package KI302.RadevychVynnytskyi.Lab2;
 import java.io.IOException;

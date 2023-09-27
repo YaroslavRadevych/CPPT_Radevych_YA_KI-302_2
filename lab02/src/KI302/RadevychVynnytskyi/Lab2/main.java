@@ -39,7 +39,8 @@ public class main {
 			System.out.println("7. Remove scope");
 			System.out.println("8. Reload the gun");
 			System.out.println("9. Compare AK-47 with M4");
-			System.out.println("10.Compare AK-47 with your gun\n");
+			System.out.println("10.Compare AK-47 with your gun");
+			System.out.println("11.Exit\n");
 			System.out.println("_________________");
 			System.out.println("Select option: ");
 			Scanner input = new Scanner(System.in);
@@ -212,9 +213,13 @@ public class main {
 					clearConsole();
 					break;
 				}
-				input.close();
 			}
-			
+			if (choice == 11) {
+				input.close();
+				clearConsole();
+				System.out.println("Exit...");
+				break;
+			}
 		}
 	}
 	
