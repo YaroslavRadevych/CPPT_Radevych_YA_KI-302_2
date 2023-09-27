@@ -236,10 +236,7 @@ public class main {
             e.printStackTrace();
         }
     }
-
-	
-		
-	}
+}
 
 	
 		

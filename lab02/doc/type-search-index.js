@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"KI302.RadevychVynnytskyi.Lab2","l":"assaultRifle"},{"p":"KI302.RadevychVynnytskyi.Lab2","l":"main"}];updateSearchResults();
