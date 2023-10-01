@@ -3,6 +3,8 @@ m * The assaultRifle class represents a model of an assault rifle.
  */
 package KI302.RadevychVynnytskyi.Lab2;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File;
 /**
  * This class defines the properties and behaviors of an assault rifle.
  * It includes attributes like name, cartridge, mass, length, firing range, bullets capacity,
@@ -24,6 +26,8 @@ public class assaultRifle {
 	private boolean scope;
 	private boolean stock;
 	private boolean muffler;
+	private PrintWriter fout;
+	
 	 /**
      * Constructs an assaultRifle object with default values.
      *
@@ -31,7 +35,7 @@ public class assaultRifle {
      */
 	
 	public assaultRifle() throws IOException {
-		name = "";
+		name = null;
 		cartridge = 0.0;
 		mass = 0.0;
 		length = 0.0;
@@ -42,6 +46,7 @@ public class assaultRifle {
 		scope = false;
 		stock = false;
 		muffler = false;
+		fout = new PrintWriter(new File("Log.txt"));
 	}
 	
 	public assaultRifle(String name, double cartridge, double mass, double length, int firingRange, int bulletsCapacity, int bulletsCurrently, int price, boolean scope, boolean stock, boolean muffler) throws IOException {
@@ -56,6 +61,7 @@ public class assaultRifle {
 		this.scope = scope;
 		this.stock = stock;
 		this.muffler = muffler;
+		fout = new PrintWriter(new File("Log.txt"));
 	}
 	
 	public void getInfo() {
@@ -70,20 +76,33 @@ public class assaultRifle {
 		System.out.println("Scope: " + scope);
 		System.out.println("Stock: " + stock);
 		System.out.println("Muffler: " + muffler);
+		logActivity("Info printed");
 	}
 	
+	private void logActivity(String message) {
+        fout.println(message);
+        fout.flush();
+    }
+
+    /**
+     * Closes the log file.
+     */
+    public void closeLogFile() {
+        fout.close();
+    }
+	
 	public void fullAutoFire() throws InterruptedException {
-		for (int i = getBulletsCurrently(); i >= 0; i--) {
+		for (int i = bulletsCurrently; i >= 0; i--) {
 			System.out.println(i + " bullets left");
 			Thread.sleep(50);
 			setBulletsCurrently(i);
 		}
 		System.out.println("Run out of bullets!");
+		logActivity("Auto Fire executed");
 	}
 	
+	
 	public void singleFire(int shots) throws InterruptedException {
-		
-		
 		
 		if (shots <= getBulletsCurrently()) {
 			for (int i = getBulletsCurrently(); i >= getBulletsCurrently() - shots; i--) {
@@ -95,6 +114,7 @@ public class assaultRifle {
 			} else {
 				System.out.println(getBulletsCurrently() + " bullets left. You can't do more shots than bullets left");
 				}
+		logActivity("Single Fire executed");
 		}
 
 	public void installMuffler(boolean muffler) {
@@ -102,9 +122,11 @@ public class assaultRifle {
 				muffler = true;
 				setMuffler(muffler);
 				System.out.println("Muffler is installed");
+				logActivity("Muffler installed");
 		} else {
 				System.out.println("Muffler is alredy installed");
 		}
+		
 	}
 	
 	public void unistallMuffler(boolean muffler) {
@@ -112,6 +134,7 @@ public class assaultRifle {
 			muffler = false;
 			setMuffler(muffler);
 			System.out.println("Muffler is uninstalled");
+			logActivity("Muffler uninstalled");
 		} else {
 			System.out.println("There is no muffler on this gun");
 		}
@@ -122,6 +145,7 @@ public class assaultRifle {
 			scope = true;
 				setScope(scope);
 				System.out.println("Scope is installed");
+				logActivity("Scope installd");
 		} else {
 				System.out.println("Scope is alredy installed");
 		}
@@ -132,6 +156,7 @@ public class assaultRifle {
 			scope = false;
 			setScope(scope);
 			System.out.println("Scope is uninstalled");
+			logActivity("Scope uninstalled");
 		} else {
 			System.out.println("There is no scope on this gun");
 		}
@@ -141,6 +166,7 @@ public class assaultRifle {
 		if (getBulletsCurrently() != 30) {
 			setBulletsCurrently(getBulletsCapacity());
 			System.out.println("The assault rifle is reloaded"); 
+			logActivity("Gun reload");
 		} else {
 			System.out.println("The magazine is full");
 		}
@@ -150,6 +176,7 @@ public class assaultRifle {
 		a.getInfo();
 		System.out.println();
 		b.getInfo();
+		logActivity("Guns comparison");
 	}
 
 	

@@ -22,7 +22,6 @@ public class main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		assaultRifle ak47 = new assaultRifle("AK-47", 7.62, 4.2, 880, 350, 30, 30, 2700, false, true, false);
-		
 		mainMenu(ak47);
 	}
 	
@@ -132,11 +131,8 @@ public class main {
 				}
 			case 9:
 				clearConsole();
-				assaultRifle ak47 = new assaultRifle("AK-47", 7.62, 4.2, 880, 350, 30, 30, 2700, false, true, false);
-				
 				assaultRifle m4 = new assaultRifle("M4", 5.56, 3.39, 840, 600, 30, 30, 3100, true, true, false);
-				
-				m4.compareGuns(ak47, m4);
+				m4.compareGuns(gun, m4);
 				
 				System.out.println("\nPress 0 - Back to Menu");
 				exit = input.nextInt();
@@ -147,62 +143,99 @@ public class main {
 				}
 			case 10:
 				clearConsole();
-				assaultRifle userGun = new assaultRifle();
+				Scanner gunName = new Scanner(System.in);
 				System.out.println("Enter name of your gun: ");
-				String name = input.nextLine();
-				userGun.setName(name);
-				input.nextLine();
-				
-				
+				String name = "";
+				if (gunName.hasNextLine()){
+				name = gunName.nextLine();
+				} else {
+					System.out.println("Invalid input. Please enter a string.");
+					break;
+				}
 				
 				System.out.println("Enter cartridge: ");
-				double cart = input.nextDouble();
-				
-				userGun.setCartridge(cart);
+				double cart = 0.0;
+				if (input.hasNextDouble()){
+					cart = input.nextDouble();
+					} else {
+						System.out.println("Invalid input. Please enter a double.");
+						break;
+					}
 				
 				System.out.println("Enter mass: ");
-				double mass = input.nextDouble();
-				
-				userGun.setMass(mass);
+				double mass = 0.0;
+				if (input.hasNextDouble()) {
+					mass = input.nextDouble();
+				} else {
+					System.out.println("Invalid input. Please enter a double.");
+					break;
+				}
 				
 				System.out.println("Enter length: ");
-				double length = input.nextDouble();
-				
-				userGun.setLength(length);
+				double length = 0.0;
+				if (input.hasNextDouble()) {
+					length = input.nextDouble();
+				} else {
+					System.out.println("Invalid input. Please enter a double.");
+					break;
+				}
 				
 				System.out.println("Enter firing range: ");
-				int firingRange = input.nextInt();
-				
-				userGun.setFiringRange(firingRange);
+				int firingRange = 0;
+				if (input.hasNextInt()) {
+					firingRange = input.nextInt();
+				} else {
+					System.out.println("Invalid input. Please enter an integer.");
+					break;
+				}
 				
 				System.out.println("Enter bullets capacity: ");
-				int bulletsCapacity = input.nextInt();
-				
-				userGun.setBulletsCapacity(bulletsCapacity);
-				userGun.setBulletsCurrently(bulletsCapacity);
+				int bulletsCapacity = 0;
+				if (input.hasNextInt()) {
+					bulletsCapacity = input.nextInt();
+				} else {
+					System.out.println("Invalid input. Please enter an integer.");
+					break;
+				}
 				
 				System.out.println("Enter price: ");
-				int price = input.nextInt();
-				
-				userGun.setPrice(price);
+				int price = 0;
+				if (input.hasNextInt()) {
+					price = input.nextInt();
+				} else {
+					System.out.println("Invalid input. Please enter an integer.");
+					break;
+				}
 				
 				System.out.println("Enter if there is a scope: ");
-				boolean scope = input.nextBoolean();
-				
-				userGun.setScope(scope);
+				boolean scope = false;
+				if (input.hasNextBoolean()) {
+					scope = input.nextBoolean();
+				} else {
+					System.out.println("Invalid input. Please enter a boolean.");
+					break;
+				}
 				
 				System.out.println("Enter if there is a stock: ");
-				boolean stock = input.nextBoolean();
-				
-				userGun.setStock(stock);
+				boolean stock = false;
+				if (input.hasNextBoolean()) {
+					stock = input.nextBoolean();
+				} else {
+					System.out.println("Invalid input. Please enter a boolean.");
+					break;
+				}
 				
 				System.out.println("Enter if there is a muffler: ");
-				boolean muffler = input.nextBoolean();
+				boolean muffler = false;
+				if (input.hasNextBoolean()){
+				muffler = input.nextBoolean();
+				} else {
+					System.out.println("Invalid input. Please enter a bool.");
+					break;
+				}
 				
-				userGun.setMuffler(muffler);
-				
+				assaultRifle userGun = new assaultRifle(name, cart, mass, length, firingRange, bulletsCapacity, bulletsCapacity, price, scope, stock, muffler);
 				assaultRifle AK47 = new assaultRifle("AK-47", 7.62, 4.2, 880, 350, 30, 30, 2700, false, true, false);
-				
 				clearConsole();
 				userGun.compareGuns(AK47, userGun);
 				
@@ -216,6 +249,7 @@ public class main {
 			}
 			if (choice == 11) {
 				input.close();
+				gun.closeLogFile();
 				clearConsole();
 				System.out.println("Exit...");
 				break;
@@ -223,24 +257,23 @@ public class main {
 		}
 	}
 	
+		@SuppressWarnings("deprecation")
+		public static void clearConsole() {
+	        try {
+	            final String os = System.getProperty("os.name");
 	
-	@SuppressWarnings("deprecation")
-	public static void clearConsole() {
-        try {
-            final String os = System.getProperty("os.name");
-
-            if (os.contains("Windows")) {
-                // If the OS is Windows, use the "cls" command
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                // If the OS is not Windows (e.g., Linux or macOS), use "clear"
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (final Exception e) {
-            // Handle exceptions here
-            e.printStackTrace();
-        }
-    }
+	            if (os.contains("Windows")) {
+	                // If the OS is Windows, use the "cls" command
+	                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+	            } else {
+	                // If the OS is not Windows (e.g., Linux or macOS), use "clear"
+	                Runtime.getRuntime().exec("clear");
+	            }
+	        } catch (final Exception e) {
+	            // Handle exceptions here
+	            e.printStackTrace();
+	        }
+	    }
 }
 
 	
