@@ -11,7 +11,6 @@ import java.util.Scanner;
  *
  */
 public class main {
-
     /**
      * The main method where the program execution begins.
      *
