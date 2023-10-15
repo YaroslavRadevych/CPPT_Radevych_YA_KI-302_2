@@ -4,37 +4,38 @@
  */
 package KI302.RadevychVynnytskyi.Lab4;
 
+import javax.swing.*;
 import java.io.*;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 /**
  * The Main class represents the main program class for user interaction.
  */
 public class Main {
     public static void main(String[] args) {
         try {
-            System.out.println("Enter file name: ");
-            Scanner in = new Scanner(System.in);
-            String fileName = in.nextLine();
+            String fileName = JOptionPane.showInputDialog("Enter file name: ");
             PrintWriter fout = new PrintWriter(new File(fileName));
             try {
-                System.out.println("Enter x: ");
-                double x = in.nextDouble();
+                double x = Double.parseDouble(JOptionPane.showInputDialog("Enter X value: "));
                 double result = calc.tg4XDivX(x);
-                System.out.println(result);
-                fout.println(result);
+
+                if (result == 0) {
+                    JOptionPane.showMessageDialog(null, "No result", "Result", JOptionPane.INFORMATION_MESSAGE);
+                    fout.println("No result");
+                } else {
+                    JOptionPane.showMessageDialog(null, result, "Result", JOptionPane.INFORMATION_MESSAGE);
+                    fout.println(result);
+                }
             }
-            catch (InputMismatchException ie){
-                System.out.println("Enter a number, neither a char or a string");
+            catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Enter a number, neither a char or a string", "Error", JOptionPane.ERROR_MESSAGE);
             }
             finally {
-                in.close();
                 fout.flush();
                 fout.close();
             }
         }
         catch(FileNotFoundException ex){
-            System.out.println("Wrong file path");
+            JOptionPane.showMessageDialog(null, "Wrong file path", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

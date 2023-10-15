@@ -2,7 +2,7 @@ package KI302.RadevychVynnytskyi.Lab4;
 /**
  * The calc class contains methods for performing mathematical calculations.
  */
-import java.io.*;
+import javax.swing.*;
 
 public class calc {
     /**
@@ -12,22 +12,19 @@ public class calc {
      * @return The result of the tangent calculation.
      * @throws myException If an exception occurs during the calculation.
      */
-    public static double tg4XDivX(double x) throws myException {
+    public static double tg4XDivX(double x) {
         double res = 0;
         try {
+            if (x == 0.0) throw new myException();
             res = (Math.tan(4 * x)) / x;
-            if (Double.isNaN(res)){
-                throw new myException();
-            }
-
         } catch (myException ae) {
             if (x == 0.0){
-                System.out.println("Can't divide by zero");
+                JOptionPane.showMessageDialog(null, "Can't divide by zero", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                throw new myException("Unknown reason of exception");
+                JOptionPane.showMessageDialog(null, "The error cause is unknown", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         return res;
-        }
+    }
 }
 
