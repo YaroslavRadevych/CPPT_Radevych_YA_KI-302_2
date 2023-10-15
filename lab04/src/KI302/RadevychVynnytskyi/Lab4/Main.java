@@ -29,10 +29,16 @@ public class Main {
             catch (NumberFormatException nfe) {
                 JOptionPane.showMessageDialog(null, "Enter a number, neither a char or a string", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            catch (NullPointerException npe) {
+                System.exit(0);
+            }
             finally {
                 fout.flush();
                 fout.close();
             }
+        }
+        catch (NullPointerException npe) {
+            System.exit(0);
         }
         catch(FileNotFoundException ex){
             JOptionPane.showMessageDialog(null, "Wrong file path", "Error", JOptionPane.ERROR_MESSAGE);
