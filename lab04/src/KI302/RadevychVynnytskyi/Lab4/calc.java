@@ -10,14 +10,14 @@ public class calc {
      *
      * @param x The input value for which to calculate the tangent.
      * @return The result of the tangent calculation.
-     * @throws myException If an exception occurs during the calculation.
+     * @throws ArithmeticException If an exception occurs during the calculation.
      */
     public static double tg4XDivX(double x) {
         double res = 0;
         try {
-            if (x == 0.0) throw new myException();
+            if (x == 0.0) throw new ArithmeticException();
             res = (Math.tan(4 * x)) / x;
-        } catch (myException ae) {
+        } catch (ArithmeticException ae) {
             if (x == 0.0){
                 JOptionPane.showMessageDialog(null, "Can't divide by zero", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
